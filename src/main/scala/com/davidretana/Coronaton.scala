@@ -62,20 +62,17 @@ object Coronaton {
     // nacimientos de hombres por estado entre los años 1970 y 2010
     val males = natalityClean
       .filter(col("is_male") === true)
-      .filter(col("year") >= 1970 && col("year") <= 2010)
       .groupBy("state").count()
       .withColumnRenamed("count", "Male")
 
     // nacimientos de mujeres por estado entre los años 1970 y 2010
     val females = natalityClean
       .filter(col("is_male") === false)
-      .filter(col("year") >= 1970 && col("year") <= 2010)
       .groupBy("state").count()
       .withColumnRenamed("count", "Female")
 
     // peso medio de todos los niños nacidos, por estado
     val meanWeigthByState = natalityClean
-      .filter(col("year") >= 1970 && col("year") <= 2010)
       .groupBy("state").mean("weight_pounds")
       .withColumnRenamed("avg(weight_pounds)", "Weight")
 
